@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { WebView } from 'react-native-webview';
+import { View, ActivityIndicator } from 'react-native';
 
-export default function App() {
+const MyWebView = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <WebView
+      source={{ uri: 'http://amc.neogeoinfo.in:8605/m' }} // Your URL
+      javaScriptEnabled={true}
+      domStorageEnabled={true}
+      allowsInlineMediaPlayback={true}
+      originWhitelist={['*']}  // Allow all origins
+      mixedContentMode="always" // For Android: allow HTTP/HTTPS mixed content
+      renderLoading={() => <ActivityIndicator size="large" color="blue" />}
+      startInLoadingState={true}
+    />
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default MyWebView;
